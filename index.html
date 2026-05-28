@@ -43,6 +43,8 @@ h1 em{font-style:italic;color:var(--acc2)}
   padding:10px 14px;font-size:13px;cursor:pointer;font-family:'Spline Sans Mono',monospace;transition:.15s;white-space:nowrap}
 .chip:hover{color:var(--ink);border-color:var(--dim)}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#1a0f08;font-weight:600}
+.chip.reset{color:var(--mut);display:inline-flex;align-items:center}
+.chip.reset:hover{color:var(--ink);border-color:var(--acc);background:rgba(255,120,71,.08)}
 
 .layout{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
 .sidebar{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;position:sticky;top:18px}
@@ -97,6 +99,9 @@ footer{margin-top:30px;color:var(--dim);font-size:12px;line-height:1.6;border-to
     <input id="q" placeholder="Search product or flavor across all locations…">
   </label>
   <div id="brandchips"></div>
+  <button class="chip reset" id="resetBtn" title="Clear search and brand filter">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:-2px;margin-right:5px"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset
+  </button>
 </div>
 
 <div class="layout">
@@ -163,5 +168,6 @@ function render(){
     g.appendChild(it);list.appendChild(g);});
 }
 document.getElementById('q').addEventListener('input',e=>{query=e.target.value.toLowerCase().trim();render();});
+document.getElementById('resetBtn').addEventListener('click',()=>{brandFilter=null;query='';document.getElementById('q').value='';render();renderChips();});
 renderCities();renderChips();render();
 </script>
